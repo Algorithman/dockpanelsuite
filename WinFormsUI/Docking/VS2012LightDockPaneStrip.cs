@@ -952,7 +952,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 width = sizeText.Width + DocumentIconWidth + DocumentIconGapLeft + DocumentIconGapRight + DocumentTextGapRight;
             else
                 width = sizeText.Width + DocumentIconGapLeft + DocumentTextGapRight;
-            
+
             width += TAB_CLOSE_BUTTON_WIDTH;
             return width;
         }
@@ -1096,7 +1096,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             GraphicsPath.Reset();
             Rectangle rect = GetTabRectangle(Tabs.IndexOf(tab));
-            
+
             // Shorten TabOutline so it doesn't get overdrawn by icons next to it
             rect.Intersect(TabsRectangle);
             rect.Width--;
@@ -1161,7 +1161,9 @@ namespace WeifenLuo.WinFormsUI.Docking
             Rectangle rectIcon = new Rectangle(
                 rect.X + DocumentIconGapLeft,
                 rect.Y + rect.Height - DocumentIconGapBottom - DocumentIconHeight,
-                DocumentIconWidth, DocumentIconHeight);
+                DocumentIconWidth,
+                DocumentIconHeight);
+
             Rectangle rectText = rectIcon;
             if (DockPane.DockPanel.ShowDocumentIcon)
             {
@@ -1247,7 +1249,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private Rectangle GetCloseButtonRect(Rectangle rectTab)
         {
-            if (Appearance != Docking.DockPane.AppearanceStyle.Document)
+            if ((Appearance != Docking.DockPane.AppearanceStyle.Document) || (!this.m_closeButtonVisible || !this.ButtonClose.Enabled))
             {
                 return Rectangle.Empty;
             }
