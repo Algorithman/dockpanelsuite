@@ -1158,6 +1158,10 @@ namespace WeifenLuo.WinFormsUI.Docking
                 return;
 
             var rectCloseButton = GetCloseButtonRect(rect);
+            if (!((DockContent)tab.Content).CloseButton || !((DockContent)tab.Content).CloseButtonVisible)
+            {
+                rectCloseButton = Rectangle.Empty;
+            }
             Rectangle rectIcon = new Rectangle(
                 rect.X + DocumentIconGapLeft,
                 rect.Y + rect.Height - DocumentIconGapBottom - DocumentIconHeight,
@@ -1249,7 +1253,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private Rectangle GetCloseButtonRect(Rectangle rectTab)
         {
-            if ((Appearance != Docking.DockPane.AppearanceStyle.Document) || (!this.m_closeButtonVisible || !this.ButtonClose.Enabled))
+            if (Appearance != Docking.DockPane.AppearanceStyle.Document)
             {
                 return Rectangle.Empty;
             }
